@@ -33,10 +33,23 @@ void main() {
           coffeeSealed.fetchCoffee(),
         ).thenAnswer((_) async => (null, coffee));
         final result = await coffeeUsecase.fetch();
-        verify(localCoffeeRepository.save(coffee)).called(1);
         expect(result, (null, coffee));
       },
     );
+
+    test('save calls localCoffeeRepository.save', () async {
+      final coffee = Coffee(file: 'dummy');
+      when(localCoffeeRepository.save(coffee)).thenAnswer((_) async {});
+      await coffeeUsecase.save(coffee);
+      verify(localCoffeeRepository.save(coffee)).called(1);
+    });
+
+    test('delete calls localCoffeeRepository.delete', () async {
+      final coffee = Coffee(file: 'dummy');
+      when(localCoffeeRepository.delete(coffee)).thenAnswer((_) async {});
+      await coffeeUsecase.delete(coffee);
+      verify(localCoffeeRepository.delete(coffee)).called(1);
+    });
 
     test(
       'fetch returns result from CoffeeClientRepository when result.error is not null and localCoffeeRepository.fetchRandom is not empty',
