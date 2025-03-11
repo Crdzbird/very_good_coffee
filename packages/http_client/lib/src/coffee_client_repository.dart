@@ -5,6 +5,8 @@ import 'package:models/models.dart';
 
 part 'coffee_client.dart';
 
+/// A repository that fetches [Coffee] from a remote server.
+/// - [fetchCoffee] fetches a [Coffee].
 sealed class CoffeeClientRepository {
   Future<(String? error, Coffee? success)> fetchCoffee();
 }

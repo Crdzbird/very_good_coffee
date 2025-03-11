@@ -1,5 +1,9 @@
 part of 'coffee_repository.dart';
 
+/// Use case for [CoffeeRepository].
+/// This class handles the business logic for fetching coffess from both local and remote sources.
+/// [CoffeeClientRepository] is used to fetch coffees from a remote source.
+/// [LocalCoffeeRepository] is used to fetch coffees from a local source.
 class CoffeeUsecase extends CoffeeRepository {
   CoffeeUsecase({
     required CoffeeClientRepository coffeeSealed,

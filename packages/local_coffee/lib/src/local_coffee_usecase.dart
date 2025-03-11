@@ -4,6 +4,9 @@ class LocalCoffeeUsecase extends LocalCoffeeRepository {
   LocalCoffeeUsecase(SharedPreferences sharedPreferences)
     : _sharedPreferences = sharedPreferences;
   final SharedPreferences _sharedPreferences;
+
+  /// Fetches all [Coffee]s.
+  /// Returns an empty list if no [Coffee]s are found.
   @override
   List<Coffee> fetchAll() {
     return _sharedPreferences
@@ -13,6 +16,7 @@ class LocalCoffeeUsecase extends LocalCoffeeRepository {
         [];
   }
 
+  /// Saves a [Coffee] locally.
   @override
   Future<void> save(Coffee coffee) {
     final coffees = fetchAll()..add(coffee);
@@ -22,6 +26,7 @@ class LocalCoffeeUsecase extends LocalCoffeeRepository {
     );
   }
 
+  /// Deletes a [Coffee] locally.
   @override
   Future<void> delete(Coffee coffee) {
     final coffees = fetchAll()..remove(coffee);
@@ -31,6 +36,8 @@ class LocalCoffeeUsecase extends LocalCoffeeRepository {
     );
   }
 
+  /// Fetches a random [Coffee].
+  /// Returns an empty [Coffee] if no [Coffee]s are found.
   @override
   Coffee fetchRandom() {
     final coffees = fetchAll();
