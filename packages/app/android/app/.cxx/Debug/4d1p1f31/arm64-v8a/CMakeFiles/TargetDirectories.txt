@@ -1,0 +1,2 @@
+/Users/crdzbird/flutterApps/very_good_coffee/packages/app/android/app/.cxx/Debug/4d1p1f31/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/crdzbird/flutterApps/very_good_coffee/packages/app/android/app/.cxx/Debug/4d1p1f31/arm64-v8a/CMakeFiles/rebuild_cache.dir

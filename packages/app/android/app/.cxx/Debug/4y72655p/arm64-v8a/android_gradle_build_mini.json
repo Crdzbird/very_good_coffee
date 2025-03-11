@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/crdzbird/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/crdzbird/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/crdzbird/flutterApps/very_good_coffee/packages/app/android/app/.cxx/Debug/4y72655p/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/crdzbird/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/crdzbird/flutterApps/very_good_coffee/packages/app/android/app/.cxx/Debug/4y72655p/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}

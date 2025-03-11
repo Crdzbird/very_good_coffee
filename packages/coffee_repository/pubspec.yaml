@@ -1,0 +1,19 @@
+name: coffee_repository
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.7.0
+resolution: workspace
+
+dependencies:
+  http_client: ^0.0.1
+  local_coffee: ^0.0.1
+  models: ^0.1.0
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+  mockito: ^5.4.5
