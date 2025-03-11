@@ -18,17 +18,23 @@ This project contains 3 flavors:
 - staging
 - production
 
-To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
+To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands, since this app is using a package architecture, you must first do these pre-steps.
+
+```sh
+cd packages/app
+```
+
+once located on the `app` directory just write on any flavor/environment you want.
 
 ```sh
 # Development
-$ flutter run --flavor development --target lib/main_development.dart
+$ flutter run --flavor development --dart-define baseUrl=https://coffee.alexflipnote.dev  --target lib/main_development.dart
 
 # Staging
-$ flutter run --flavor staging --target lib/main_staging.dart
+$ flutter run --flavor staging --dart-define baseUrl=https://coffee.alexflipnote.dev --target lib/main_staging.dart
 
 # Production
-$ flutter run --flavor production --target lib/main_production.dart
+$ flutter run --flavor production --dart-define baseUrl=https://coffee.alexflipnote.dev --target lib/main_production.dart
 ```
 
 _\*Very Good Coffee works on iOS, Android, Web, and Windows._
@@ -37,10 +43,16 @@ _\*Very Good Coffee works on iOS, Android, Web, and Windows._
 
 ## Running Tests 🧪
 
-To run all unit and widget tests use the following command:
+You can execute all the test by calling a script located at root level directory named: **test_script.sh**, but if for some reason the command doesn't generate the code coverage, then you need to execute the test for each package :(
+
 
 ```sh
-$ flutter test --coverage --test-randomize-ordering-seed random
+$ flutter test packages/app --coverage
+$ flutter test packages/coffee_repository --coverage
+$ flutter test packages/dart_envs --coverage
+$ flutter test packages/http_client --coverage
+$ flutter test packages/local_coffee --coverage
+$ flutter test packages/models --coverage
 ```
 
 To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
