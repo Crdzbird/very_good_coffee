@@ -1,6 +1,6 @@
 part of 'coffee_repository.dart';
 
-final class CoffeeUsecase extends CoffeeRepository {
+class CoffeeUsecase extends CoffeeRepository {
   CoffeeUsecase({
     required CoffeeClientRepository coffeeSealed,
     required LocalCoffeeRepository localCoffeeRepository,
