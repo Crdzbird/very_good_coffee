@@ -12,6 +12,13 @@ class CoffeeBloc extends Cubit<CoffeeState> {
 
   final CoffeeRepository _coffeeRepository;
 
+  Coffee get _coffee {
+    if (state is CoffeeLoaded) {
+      return (state as CoffeeLoaded).coffee;
+    }
+    return Coffee();
+  }
+
   void fetchCoffee() async {
     emit(CoffeeLoading());
     final result = await _coffeeRepository.fetch();
@@ -19,5 +26,15 @@ class CoffeeBloc extends Cubit<CoffeeState> {
       return emit(CoffeeError(result.$1!));
     }
     emit(CoffeeLoaded(result.$2!));
+  }
+
+  void deleteCoffee(Coffee coffee) async {
+    await _coffeeRepository.delete(coffee);
+    emit(CoffeeLoaded(_coffee, isFavorite: false));
+  }
+
+  void saveCoffee(Coffee coffee) async {
+    await _coffeeRepository.save(coffee);
+    emit(CoffeeLoaded(_coffee, isFavorite: true));
   }
 }

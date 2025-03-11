@@ -1,10 +1,18 @@
+import 'package:app/presentation/coffee/bloc/coffee_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 
 class VgcCoffeeCard extends StatelessWidget {
-  const VgcCoffeeCard({super.key, required Coffee coffee}) : _coffee = coffee;
+  const VgcCoffeeCard({
+    super.key,
+    required Coffee coffee,
+    bool isFavorite = false,
+  }) : _coffee = coffee,
+       _isFavorite = isFavorite;
   final Coffee _coffee;
+  final bool _isFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,26 @@ class VgcCoffeeCard extends StatelessWidget {
             imageUrl: _coffee.file,
             cacheKey: '${_coffee.hashCode}',
           ),
-          Text(_coffee.file),
+          ListTile(
+            title: Text(_coffee.file),
+            trailing: Switch.adaptive(
+              value: _isFavorite,
+              thumbIcon: WidgetStateProperty.fromMap({
+                WidgetState.selected: Icon(Icons.favorite, color: Colors.red),
+                WidgetState.any: Icon(
+                  Icons.favorite_border,
+                  color: Colors.grey,
+                ),
+              }),
+              onChanged: (value) {
+                if (value) {
+                  context.read<CoffeeBloc>().saveCoffee(_coffee);
+                  return;
+                }
+                context.read<CoffeeBloc>().deleteCoffee(_coffee);
+              },
+            ),
+          ),
         ],
       ),
     );

@@ -10,12 +10,13 @@ sealed class CoffeeState extends Equatable {
 final class CoffeeLoading extends CoffeeState {}
 
 final class CoffeeLoaded extends CoffeeState {
-  const CoffeeLoaded(this.coffee);
+  const CoffeeLoaded(this.coffee, {this.isFavorite = false});
 
   final Coffee coffee;
+  final bool isFavorite;
 
   @override
-  List<Object> get props => [coffee];
+  List<Object> get props => [coffee, isFavorite];
 }
 
 final class CoffeeError extends CoffeeState {

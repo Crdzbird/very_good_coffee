@@ -16,12 +16,21 @@ final class CoffeeUsecase extends CoffeeRepository {
       if (randomLocalCoffee.file.isEmpty) return result;
       return (null, randomLocalCoffee);
     }
-    _localCoffeeRepository.save(result.$2!);
     return result;
   }
 
   @override
   List<Coffee> fetchAllLocal() {
     return _localCoffeeRepository.fetchAll();
+  }
+
+  @override
+  Future<void> save(Coffee coffee) {
+    return _localCoffeeRepository.save(coffee);
+  }
+
+  @override
+  Future<void> delete(Coffee coffee) {
+    return _localCoffeeRepository.delete(coffee);
   }
 }

@@ -16,7 +16,10 @@ class CoffeeContent extends StatelessWidget {
         if (state is CoffeeError) {
           return Text(state.message);
         }
-        return VgcCoffeeCard(coffee: (state as CoffeeLoaded).coffee);
+        return VgcCoffeeCard(
+          coffee: (state as CoffeeLoaded).coffee,
+          isFavorite: state.isFavorite,
+        );
       },
     );
   }
