@@ -45,14 +45,13 @@ _\*Very Good Coffee works on iOS, Android, Web, and Windows._
 
 You can execute all the test by calling a script located at root level directory named: **test_script.sh**, but if for some reason the command doesn't generate the code coverage, then you need to execute the test for each package :(
 
-
 ```sh
-$ flutter test packages/app --coverage
-$ flutter test packages/coffee_repository --coverage
-$ flutter test packages/dart_envs --coverage
-$ flutter test packages/http_client --coverage
-$ flutter test packages/local_coffee --coverage
-$ flutter test packages/models --coverage
+$flutter test packages/app --coverage
+$flutter test packages/coffee_repository --coverage
+$flutter test packages/dart_envs --coverage
+$flutter test packages/http_client --coverage
+$flutter test packages/local_coffee --coverage
+$flutter test packages/models --coverage
 ```
 
 To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
@@ -85,7 +84,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 }
 ```
 
-2. Then add a new key/value and description
+2.Then add a new key/value and description
 
 ```arb
 {
@@ -101,7 +100,7 @@ This project relies on [flutter_localizations][flutter_localizations_link] and f
 }
 ```
 
-3. Use the new string
+3.Use the new string
 
 ```dart
 import 'package:very_good_coffee/l10n/l10n.dart';
@@ -121,10 +120,10 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
     ...
 
     <key>CFBundleLocalizations</key>
-	<array>
-		<string>en</string>
-		<string>es</string>
-	</array>
+ <array>
+  <string>en</string>
+  <string>es</string>
+ </array>
 
     ...
 ```
@@ -133,14 +132,14 @@ Update the `CFBundleLocalizations` array in the `Info.plist` at `ios/Runner/Info
 
 1. For each supported locale, add a new ARB file in `lib/l10n/arb`.
 
-```
+```dart
 ├── l10n
 │   ├── arb
 │   │   ├── app_en.arb
 │   │   └── app_es.arb
 ```
 
-2. Add the translated strings to each `.arb` file:
+2.Add the translated strings to each `.arb` file:
 
 `app_en.arb`
 
