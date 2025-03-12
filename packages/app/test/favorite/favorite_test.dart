@@ -8,7 +8,6 @@ import 'package:local_coffee/local_coffee.dart';
 import 'package:mockito/mockito.dart';
 import 'package:models/models.dart';
 
-import '../helpers/helpers.dart';
 import '../helpers/mocks.mocks.dart';
 
 void main() {
@@ -36,7 +35,7 @@ void main() {
       when(coffeeRepository.fetchAllLocal()).thenReturn([
         Coffee(file: 'https://coffee.alexflipnote.dev/2cuNGfDh1V0_coffee.png'),
       ]);
-      await tester.pumpApp(
+      await tester.pumpWidget(
         AppProvider(
           coffeeSealed: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
@@ -62,7 +61,7 @@ void main() {
           ),
         ),
       ).thenAnswer((_) async {});
-      await tester.pumpApp(
+      await tester.pumpWidget(
         AppProvider(
           coffeeSealed: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
