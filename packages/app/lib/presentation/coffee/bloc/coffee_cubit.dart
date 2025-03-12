@@ -5,8 +5,8 @@ import 'package:models/models.dart';
 
 part 'coffee_state.dart';
 
-class CoffeeBloc extends Cubit<CoffeeState> {
-  CoffeeBloc({required CoffeeRepository coffeeRepository})
+class CoffeeCubit extends Cubit<CoffeeState> {
+  CoffeeCubit({required CoffeeRepository coffeeRepository})
     : _coffeeRepository = coffeeRepository,
       super(CoffeeLoading());
 

@@ -1,4 +1,4 @@
-import 'package:app/presentation/favorites/bloc/favorites_bloc.dart';
+import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:app/presentation/favorites/widgets/favorite_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,7 @@ class FavoriteListContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        BlocBuilder<FavoritesBloc, FavoritesState>(
+        BlocBuilder<FavoritesCubit, FavoritesState>(
           builder: (bContext, state) {
             if (state is FavoritesLoading) {
               return const SliverToBoxAdapter(

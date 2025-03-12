@@ -1,4 +1,4 @@
-import 'package:app/presentation/coffee/bloc/coffee_bloc.dart';
+import 'package:app/presentation/coffee/bloc/coffee_cubit.dart';
 import 'package:app/presentation/coffee/widgets/vgc_coffee_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +8,7 @@ class CoffeeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CoffeeBloc, CoffeeState>(
+    return BlocBuilder<CoffeeCubit, CoffeeState>(
       builder: (bContext, state) {
         if (state is CoffeeLoading) {
           return const CircularProgressIndicator.adaptive();

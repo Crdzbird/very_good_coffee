@@ -1,4 +1,4 @@
-import 'package:app/core/bootstrap.dart';
+import 'package:app/bootstrap.dart';
 import 'package:app/presentation/app/provider/app_provider.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/widgets.dart';
@@ -11,13 +11,13 @@ Future<void> main() async {
   final coffeeClient = CoffeeClient();
   final localCoffeeRepository = LocalCoffeeUsecase(sharedPreferences);
   final coffeeRepository = CoffeeUsecase(
-    coffeeSealed: coffeeClient,
+    coffeeClient: coffeeClient,
     localCoffeeRepository: localCoffeeRepository,
   );
 
   await bootstrap(
     () => AppProvider(
-      coffeeSealed: coffeeClient,
+      coffeeClient: coffeeClient,
       coffeeRepository: coffeeRepository,
       localCoffeeRepository: localCoffeeRepository,
     ),

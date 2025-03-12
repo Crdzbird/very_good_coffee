@@ -5,8 +5,8 @@ import 'package:models/models.dart';
 
 part 'favorites_state.dart';
 
-class FavoritesBloc extends Cubit<FavoritesState> {
-  FavoritesBloc({required CoffeeRepository coffeeRepository})
+class FavoritesCubit extends Cubit<FavoritesState> {
+  FavoritesCubit({required CoffeeRepository coffeeRepository})
     : _coffeeRepository = coffeeRepository,
       super(FavoritesLoading());
   final CoffeeRepository _coffeeRepository;

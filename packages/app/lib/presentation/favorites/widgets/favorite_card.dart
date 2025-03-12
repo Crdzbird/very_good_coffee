@@ -1,4 +1,4 @@
-import 'package:app/presentation/favorites/bloc/favorites_bloc.dart';
+import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +20,7 @@ class FavoriteCard extends StatelessWidget {
             trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed:
-                  () => context.read<FavoritesBloc>().deleteFavorite(_coffee),
+                  () => context.read<FavoritesCubit>().deleteFavorite(_coffee),
             ),
           ),
         ],

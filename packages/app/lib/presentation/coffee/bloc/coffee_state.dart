@@ -1,4 +1,4 @@
-part of 'coffee_bloc.dart';
+part of 'coffee_cubit.dart';
 
 sealed class CoffeeState extends Equatable {
   const CoffeeState();

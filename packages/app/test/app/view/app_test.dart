@@ -38,7 +38,7 @@ void main() {
       (tester) => mockNetworkImages(() async {
         await tester.pumpWidget(
           AppProvider(
-            coffeeSealed: coffeeClientRepository,
+            coffeeClient: coffeeClientRepository,
             localCoffeeRepository: localCoffeeRepository,
             coffeeRepository: coffeeRepository,
           ),
@@ -50,7 +50,7 @@ void main() {
     testWidgets('renders CoffeeScreen and taps on refresh', (tester) async {
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),
@@ -70,7 +70,7 @@ void main() {
       when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),
@@ -93,7 +93,7 @@ void main() {
 
         await tester.pumpWidget(
           AppProvider(
-            coffeeSealed: coffeeClientRepository,
+            coffeeClient: coffeeClientRepository,
             localCoffeeRepository: localCoffeeRepository,
             coffeeRepository: coffeeRepository,
           ),
@@ -120,7 +120,7 @@ void main() {
       ).thenAnswer((_) async => ('Fake Error', null));
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),
@@ -133,7 +133,7 @@ void main() {
       when(coffeeRepository.fetchAllLocal()).thenReturn([]);
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),

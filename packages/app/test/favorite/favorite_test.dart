@@ -37,7 +37,7 @@ void main() {
       ]);
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),
@@ -63,7 +63,7 @@ void main() {
       ).thenAnswer((_) async {});
       await tester.pumpWidget(
         AppProvider(
-          coffeeSealed: coffeeClientRepository,
+          coffeeClient: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
           coffeeRepository: coffeeRepository,
         ),

@@ -11,14 +11,14 @@ import 'coffee_usecase_test.mocks.dart';
 @GenerateMocks([CoffeeClient, LocalCoffeeUsecase])
 void main() {
   late CoffeeUsecase coffeeUsecase;
-  late CoffeeClientRepository coffeeSealed;
+  late CoffeeClientRepository coffeeClient;
   late LocalCoffeeRepository localCoffeeRepository;
 
   setUpAll(() {
-    coffeeSealed = MockCoffeeClient();
+    coffeeClient = MockCoffeeClient();
     localCoffeeRepository = MockLocalCoffeeUsecase();
     coffeeUsecase = CoffeeUsecase(
-      coffeeSealed: coffeeSealed,
+      coffeeClient: coffeeClient,
       localCoffeeRepository: localCoffeeRepository,
     );
     provideDummy<Coffee>(Coffee(file: 'dummy'));
@@ -30,7 +30,7 @@ void main() {
       () async {
         final coffee = Coffee(file: 'dummy');
         when(
-          coffeeSealed.fetchCoffee(),
+          coffeeClient.fetchCoffee(),
         ).thenAnswer((_) async => (null, coffee));
         final result = await coffeeUsecase.fetch();
         expect(result, (null, coffee));
@@ -55,7 +55,7 @@ void main() {
       'fetch returns result from CoffeeClientRepository when result.error is not null and localCoffeeRepository.fetchRandom is not empty',
       () async {
         when(
-          coffeeSealed.fetchCoffee(),
+          coffeeClient.fetchCoffee(),
         ).thenAnswer((_) async => ('error', null));
         when(
           localCoffeeRepository.fetchRandom(),
@@ -70,7 +70,7 @@ void main() {
       'fetch returns result from CoffeeClientRepository when result.error is not null and localCoffeeRepository.fetchRandom is empty',
       () async {
         when(
-          coffeeSealed.fetchCoffee(),
+          coffeeClient.fetchCoffee(),
         ).thenAnswer((_) async => ('error', null));
         when(localCoffeeRepository.fetchRandom()).thenReturn(Coffee(file: ''));
 

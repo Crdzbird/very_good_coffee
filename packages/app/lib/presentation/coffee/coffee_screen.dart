@@ -1,4 +1,4 @@
-import 'package:app/presentation/coffee/bloc/coffee_bloc.dart';
+import 'package:app/presentation/coffee/bloc/coffee_cubit.dart';
 import 'package:app/presentation/coffee/widgets/coffee_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,7 @@ class CoffeeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: context.read<CoffeeBloc>().fetchCoffee,
+        onPressed: context.read<CoffeeCubit>().fetchCoffee,
         child: const Icon(Icons.refresh),
       ),
     );

@@ -6,15 +6,15 @@ part of 'coffee_repository.dart';
 /// [LocalCoffeeRepository] is used to fetch coffees from a local source.
 class CoffeeUsecase extends CoffeeRepository {
   CoffeeUsecase({
-    required CoffeeClientRepository coffeeSealed,
+    required CoffeeClientRepository coffeeClient,
     required LocalCoffeeRepository localCoffeeRepository,
-  }) : _coffeeSealed = coffeeSealed,
+  }) : _coffeeClient = coffeeClient,
        _localCoffeeRepository = localCoffeeRepository;
-  final CoffeeClientRepository _coffeeSealed;
+  final CoffeeClientRepository _coffeeClient;
   final LocalCoffeeRepository _localCoffeeRepository;
   @override
   Future<(String?, Coffee?)> fetch() async {
-    final result = await _coffeeSealed.fetchCoffee();
+    final result = await _coffeeClient.fetchCoffee();
     if (result.$1 != null) {
       final randomLocalCoffee = _localCoffeeRepository.fetchRandom();
       if (randomLocalCoffee.file.isEmpty) return result;

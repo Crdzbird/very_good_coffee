@@ -1,4 +1,4 @@
-import 'package:app/presentation/coffee/bloc/coffee_bloc.dart';
+import 'package:app/presentation/coffee/bloc/coffee_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,10 +36,10 @@ class VgcCoffeeCard extends StatelessWidget {
               }),
               onChanged: (value) {
                 if (value) {
-                  context.read<CoffeeBloc>().saveCoffee(_coffee);
+                  context.read<CoffeeCubit>().saveCoffee(_coffee);
                   return;
                 }
-                context.read<CoffeeBloc>().deleteCoffee(_coffee);
+                context.read<CoffeeCubit>().deleteCoffee(_coffee);
               },
             ),
           ),
