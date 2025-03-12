@@ -29,8 +29,8 @@ import 'package:models/models.dart' as _i4;
 /// A class which mocks [CoffeeApiClient].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockCoffeeClient extends _i1.Mock implements _i2.CoffeeApiClient {
-  MockCoffeeClient() {
+class MockCoffeeApiClient extends _i1.Mock implements _i2.CoffeeApiClient {
+  MockCoffeeApiClient() {
     _i1.throwOnMissingStub(this);
   }
 

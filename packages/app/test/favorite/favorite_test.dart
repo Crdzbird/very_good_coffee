@@ -1,5 +1,5 @@
-import 'package:app/presentation/app/provider/app_provider.dart';
-import 'package:app/presentation/favorites/favorites_screen.dart';
+import 'package:app/presentation/app/screen/app_screen.dart';
+import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +17,7 @@ void main() {
     late CoffeeRepository coffeeRepository;
 
     setUp(() {
-      coffeeClientRepository = MockCoffeeClient();
+      coffeeClientRepository = MockCoffeeApiClient();
       localCoffeeDatasource = MockLocalCoffeeUsecase();
       coffeeRepository = MockCoffeeUsecase();
 
@@ -36,7 +36,7 @@ void main() {
         Coffee(file: 'https://coffee.alexflipnote.dev/2cuNGfDh1V0_coffee.png'),
       ]);
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -45,7 +45,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Favorites'));
       await tester.pumpAndSettle();
-      expect(find.byType(FavoritesScreen), findsOneWidget);
+      expect(find.byType(FavoritesView), findsOneWidget);
     });
 
     testWidgets('go to favorites screen and remove one element', (
@@ -62,7 +62,7 @@ void main() {
         ),
       ).thenAnswer((_) async {});
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.text('Favorites'));
       await tester.pumpAndSettle();
-      expect(find.byType(FavoritesScreen), findsOneWidget);
+      expect(find.byType(FavoritesView), findsOneWidget);
       await tester.tap(find.byIcon(Icons.delete));
       await tester.pumpAndSettle();
       verify(

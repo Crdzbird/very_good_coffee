@@ -1,6 +1,6 @@
-import 'package:app/presentation/app/provider/app_provider.dart';
+import 'package:app/presentation/app/screen/app_screen.dart';
 import 'package:app/presentation/coffee/coffee_screen.dart';
-import 'package:app/presentation/favorites/favorites_screen.dart';
+import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -19,7 +19,7 @@ void main() {
     late CoffeeRepository coffeeRepository;
 
     setUp(() {
-      coffeeClientRepository = MockCoffeeClient();
+      coffeeClientRepository = MockCoffeeApiClient();
       localCoffeeDatasource = MockLocalCoffeeUsecase();
       coffeeRepository = MockCoffeeUsecase();
 
@@ -37,7 +37,7 @@ void main() {
       'renders AppView',
       (tester) => mockNetworkImages(() async {
         await tester.pumpWidget(
-          AppProvider(
+          AppScreen(
             coffeeClient: coffeeClientRepository,
             localCoffeeDatasource: localCoffeeDatasource,
             coffeeRepository: coffeeRepository,
@@ -49,7 +49,7 @@ void main() {
 
     testWidgets('renders CoffeeScreen and taps on refresh', (tester) async {
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -69,7 +69,7 @@ void main() {
     ) async {
       when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -92,7 +92,7 @@ void main() {
         when(coffeeRepository.delete(Coffee())).thenAnswer((_) async {});
 
         await tester.pumpWidget(
-          AppProvider(
+          AppScreen(
             coffeeClient: coffeeClientRepository,
             localCoffeeDatasource: localCoffeeDatasource,
             coffeeRepository: coffeeRepository,
@@ -119,7 +119,7 @@ void main() {
         coffeeRepository.fetch(),
       ).thenAnswer((_) async => ('Fake Error', null));
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -132,7 +132,7 @@ void main() {
     testWidgets('go to favorites screen', (tester) async {
       when(coffeeRepository.fetchAllLocal()).thenReturn([]);
       await tester.pumpWidget(
-        AppProvider(
+        AppScreen(
           coffeeClient: coffeeClientRepository,
           localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
@@ -142,7 +142,7 @@ void main() {
       expect(find.byType(CoffeeScreen), findsOneWidget);
       await tester.tap(find.text('Favorites'));
       await tester.pumpAndSettle();
-      expect(find.byType(FavoritesScreen), findsOneWidget);
+      expect(find.byType(FavoritesView), findsOneWidget);
     });
   });
 }

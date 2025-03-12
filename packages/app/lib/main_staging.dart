@@ -1,5 +1,5 @@
 import 'package:app/bootstrap.dart';
-import 'package:app/presentation/app/provider/app_provider.dart';
+import 'package:app/presentation/app/screen/app_screen.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http_client/http_client.dart';
@@ -16,7 +16,7 @@ Future<void> main() async {
   );
 
   await bootstrap(
-    () => AppProvider(
+    () => AppScreen(
       coffeeClient: coffeeClient,
       coffeeRepository: coffeeRepository,
       localCoffeeDatasource: localCoffeeDatasource,

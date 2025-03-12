@@ -1,12 +1,12 @@
-import 'package:app/presentation/app/view/app.dart';
+import 'package:app/presentation/app/view/app_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http_client/http_client.dart';
 import 'package:local_coffee/local_coffee.dart';
 
-class AppProvider extends StatelessWidget {
-  const AppProvider({
+class AppScreen extends StatelessWidget {
+  const AppScreen({
     super.key,
     required CoffeeApiClientDatasource coffeeClient,
     required LocalCoffeeDatasource localCoffeeDatasource,
@@ -26,7 +26,7 @@ class AppProvider extends StatelessWidget {
         RepositoryProvider.value(value: _localCoffeeDatasource),
         RepositoryProvider.value(value: _coffeeRepository),
       ],
-      child: App(),
+      child: AppView(),
     );
   }
 }

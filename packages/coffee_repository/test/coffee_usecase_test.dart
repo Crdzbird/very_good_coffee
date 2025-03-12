@@ -15,7 +15,7 @@ void main() {
   late LocalCoffeeDatasource localCoffeeDatasource;
 
   setUpAll(() {
-    coffeeClient = MockCoffeeClient();
+    coffeeClient = MockCoffeeApiClient();
     localCoffeeDatasource = MockLocalCoffeeUsecase();
     coffeeUsecase = CoffeeUsecase(
       coffeeClient: coffeeClient,

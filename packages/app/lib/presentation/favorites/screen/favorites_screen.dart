@@ -1,11 +1,11 @@
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
-import 'package:app/presentation/favorites/favorites_screen.dart';
+import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavoritesProvider extends StatelessWidget {
-  const FavoritesProvider({super.key});
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class FavoritesProvider extends StatelessWidget {
           (bContext) => FavoritesCubit(
             coffeeRepository: bContext.read<CoffeeRepository>(),
           )..fetchFavorites(),
-      child: const FavoritesScreen(),
+      child: const FavoritesView(),
     );
   }
 }
