@@ -10,7 +10,6 @@ import 'package:mockito/mockito.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:models/models.dart';
 
-import '../../helpers/helpers.dart';
 import '../../helpers/mocks.mocks.dart';
 
 void main() {
@@ -69,7 +68,7 @@ void main() {
       tester,
     ) async {
       when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
-      await tester.pumpApp(
+      await tester.pumpWidget(
         AppProvider(
           coffeeSealed: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
@@ -92,7 +91,7 @@ void main() {
         when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
         when(coffeeRepository.delete(Coffee())).thenAnswer((_) async {});
 
-        await tester.pumpApp(
+        await tester.pumpWidget(
           AppProvider(
             coffeeSealed: coffeeClientRepository,
             localCoffeeRepository: localCoffeeRepository,
@@ -119,7 +118,7 @@ void main() {
       when(
         coffeeRepository.fetch(),
       ).thenAnswer((_) async => ('Fake Error', null));
-      await tester.pumpApp(
+      await tester.pumpWidget(
         AppProvider(
           coffeeSealed: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
@@ -132,7 +131,7 @@ void main() {
 
     testWidgets('go to favorites screen', (tester) async {
       when(coffeeRepository.fetchAllLocal()).thenReturn([]);
-      await tester.pumpApp(
+      await tester.pumpWidget(
         AppProvider(
           coffeeSealed: coffeeClientRepository,
           localCoffeeRepository: localCoffeeRepository,
