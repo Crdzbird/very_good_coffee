@@ -8,18 +8,18 @@ import 'package:local_coffee/local_coffee.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final sharedPreferences = await SharedPreferences.getInstance();
-  final coffeeClient = CoffeeClient();
-  final localCoffeeRepository = LocalCoffeeUsecase(sharedPreferences);
+  final coffeeClient = CoffeeApiClient();
+  final localCoffeeDatasource = LocalCoffeeUsecase(sharedPreferences);
   final coffeeRepository = CoffeeUsecase(
     coffeeClient: coffeeClient,
-    localCoffeeRepository: localCoffeeRepository,
+    localCoffeeDatasource: localCoffeeDatasource,
   );
 
   await bootstrap(
     () => AppProvider(
       coffeeClient: coffeeClient,
       coffeeRepository: coffeeRepository,
-      localCoffeeRepository: localCoffeeRepository,
+      localCoffeeDatasource: localCoffeeDatasource,
     ),
   );
 }

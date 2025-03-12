@@ -4,17 +4,17 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:models/models.dart';
 
-import 'local_coffee_usecase_test.mocks.dart';
+import 'local_coffe_test.mocks.dart';
 
 @GenerateMocks([SharedPreferences])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
-  late LocalCoffeeRepository localCoffeeRepository;
+  late LocalCoffeeDatasource localCoffeeDatasource;
   late SharedPreferences mockSharedPreferences;
 
   setUp(() {
     mockSharedPreferences = MockSharedPreferences();
-    localCoffeeRepository = LocalCoffeeUsecase(mockSharedPreferences);
+    localCoffeeDatasource = LocalCoffeeUsecase(mockSharedPreferences);
   });
 
   group('LocalCoffeeUsecase', () {
@@ -22,7 +22,7 @@ void main() {
       when(
         mockSharedPreferences.getStringList(LocalEnums.coffee.name),
       ).thenReturn(['{"file": "Espresso"}']);
-      final coffees = localCoffeeRepository.fetchAll();
+      final coffees = localCoffeeDatasource.fetchAll();
       expect(coffees.length, 1);
       expect(coffees.first.file, 'Espresso');
     });
@@ -31,7 +31,7 @@ void main() {
       when(
         mockSharedPreferences.getStringList(LocalEnums.coffee.name),
       ).thenReturn(null);
-      final coffees = localCoffeeRepository.fetchAll();
+      final coffees = localCoffeeDatasource.fetchAll();
       expect(coffees, isEmpty);
     });
 
@@ -46,7 +46,7 @@ void main() {
       ).thenAnswer((_) async => true);
 
       final coffee = Coffee(file: 'Latte');
-      await localCoffeeRepository.save(coffee);
+      await localCoffeeDatasource.save(coffee);
 
       verify(
         mockSharedPreferences.setStringList(LocalEnums.coffee.name, [
@@ -64,7 +64,7 @@ void main() {
         mockSharedPreferences.setStringList(LocalEnums.coffee.name, []),
       ).thenAnswer((_) async => true);
 
-      await localCoffeeRepository.delete(coffee);
+      await localCoffeeDatasource.delete(coffee);
 
       verify(
         mockSharedPreferences.setStringList(LocalEnums.coffee.name, []),
@@ -77,7 +77,7 @@ void main() {
         mockSharedPreferences.getStringList(LocalEnums.coffee.name),
       ).thenReturn([coffee.toJson]);
 
-      final randomCoffee = localCoffeeRepository.fetchRandom();
+      final randomCoffee = localCoffeeDatasource.fetchRandom();
       expect(randomCoffee.file, 'Cappuccino');
     });
   });

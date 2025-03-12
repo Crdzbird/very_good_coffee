@@ -7,18 +7,18 @@ import 'package:mockito/mockito.dart';
 import 'package:models/models.dart';
 import 'package:test/test.dart';
 
-import 'coffee_client_test.mocks.dart';
+import 'coffee_api_client_test.mocks.dart';
 
 @GenerateMocks([Dio])
 void main() {
   HttpOverrides.global = _MyHttpOverrides();
-  group('CoffeeClient', () {
+  group('CoffeeApiClient', () {
     late MockDio mockDio;
-    late CoffeeClient coffeeClient;
+    late CoffeeApiClient coffeeClient;
 
     setUpAll(() {
       mockDio = MockDio();
-      coffeeClient = CoffeeClient(dio: mockDio);
+      coffeeClient = CoffeeApiClient(dio: mockDio);
     });
 
     test('fetchCoffee returns a coffee "fake_coffee"', () async {

@@ -9,7 +9,7 @@ part 'local_coffee_usecase.dart';
 /// - [save] saves a [Coffee] locally.
 /// - [fetchAll] fetches all [Coffee]s.
 /// - [fetchRandom] fetches a random [Coffee].
-sealed class LocalCoffeeRepository {
+sealed class LocalCoffeeDatasource {
   Future<void> save(Coffee coffee);
   List<Coffee> fetchAll();
   Coffee fetchRandom();

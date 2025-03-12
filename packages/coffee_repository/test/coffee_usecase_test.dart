@@ -8,25 +8,25 @@ import 'package:models/models.dart';
 
 import 'coffee_usecase_test.mocks.dart';
 
-@GenerateMocks([CoffeeClient, LocalCoffeeUsecase])
+@GenerateMocks([CoffeeApiClient, LocalCoffeeUsecase])
 void main() {
   late CoffeeUsecase coffeeUsecase;
-  late CoffeeClientRepository coffeeClient;
-  late LocalCoffeeRepository localCoffeeRepository;
+  late CoffeeApiClientDatasource coffeeClient;
+  late LocalCoffeeDatasource localCoffeeDatasource;
 
   setUpAll(() {
     coffeeClient = MockCoffeeClient();
-    localCoffeeRepository = MockLocalCoffeeUsecase();
+    localCoffeeDatasource = MockLocalCoffeeUsecase();
     coffeeUsecase = CoffeeUsecase(
       coffeeClient: coffeeClient,
-      localCoffeeRepository: localCoffeeRepository,
+      localCoffeeDatasource: localCoffeeDatasource,
     );
     provideDummy<Coffee>(Coffee(file: 'dummy'));
   });
 
   group('CoffeeUsecase', () {
     test(
-      'fetch returns result from CoffeeClientRepository when result.error is null',
+      'fetch returns result from CoffeeApiClientDatasource when result.error is null',
       () async {
         final coffee = Coffee(file: 'dummy');
         when(
@@ -37,28 +37,28 @@ void main() {
       },
     );
 
-    test('save calls localCoffeeRepository.save', () async {
+    test('save calls localCoffeeDatasource.save', () async {
       final coffee = Coffee(file: 'dummy');
-      when(localCoffeeRepository.save(coffee)).thenAnswer((_) async {});
+      when(localCoffeeDatasource.save(coffee)).thenAnswer((_) async {});
       await coffeeUsecase.save(coffee);
-      verify(localCoffeeRepository.save(coffee)).called(1);
+      verify(localCoffeeDatasource.save(coffee)).called(1);
     });
 
-    test('delete calls localCoffeeRepository.delete', () async {
+    test('delete calls localCoffeeDatasource.delete', () async {
       final coffee = Coffee(file: 'dummy');
-      when(localCoffeeRepository.delete(coffee)).thenAnswer((_) async {});
+      when(localCoffeeDatasource.delete(coffee)).thenAnswer((_) async {});
       await coffeeUsecase.delete(coffee);
-      verify(localCoffeeRepository.delete(coffee)).called(1);
+      verify(localCoffeeDatasource.delete(coffee)).called(1);
     });
 
     test(
-      'fetch returns result from CoffeeClientRepository when result.error is not null and localCoffeeRepository.fetchRandom is not empty',
+      'fetch returns result from CoffeeApiClientDatasource when result.error is not null and localCoffeeDatasource.fetchRandom is not empty',
       () async {
         when(
           coffeeClient.fetchCoffee(),
         ).thenAnswer((_) async => ('error', null));
         when(
-          localCoffeeRepository.fetchRandom(),
+          localCoffeeDatasource.fetchRandom(),
         ).thenReturn(Coffee(file: 'dummy'));
 
         final result = await coffeeUsecase.fetch();
@@ -67,12 +67,12 @@ void main() {
     );
 
     test(
-      'fetch returns result from CoffeeClientRepository when result.error is not null and localCoffeeRepository.fetchRandom is empty',
+      'fetch returns result from CoffeeApiClientDatasource when result.error is not null and localCoffeeDatasource.fetchRandom is empty',
       () async {
         when(
           coffeeClient.fetchCoffee(),
         ).thenAnswer((_) async => ('error', null));
-        when(localCoffeeRepository.fetchRandom()).thenReturn(Coffee(file: ''));
+        when(localCoffeeDatasource.fetchRandom()).thenReturn(Coffee(file: ''));
 
         final result = await coffeeUsecase.fetch();
         expect(result, ('error', null));
@@ -81,12 +81,12 @@ void main() {
 
     test('fetchAllLocal returns all local coffees', () {
       final coffees = [Coffee(file: 'file1'), Coffee(file: 'file2')];
-      when(localCoffeeRepository.fetchAll()).thenReturn(coffees);
+      when(localCoffeeDatasource.fetchAll()).thenReturn(coffees);
 
       final result = coffeeUsecase.fetchAllLocal();
 
       expect(result, coffees);
-      verify(localCoffeeRepository.fetchAll()).called(1);
+      verify(localCoffeeDatasource.fetchAll()).called(1);
     });
   });
 }

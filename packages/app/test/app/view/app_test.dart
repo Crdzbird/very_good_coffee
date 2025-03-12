@@ -14,13 +14,13 @@ import '../../helpers/mocks.mocks.dart';
 
 void main() {
   group('App', () {
-    late CoffeeClientRepository coffeeClientRepository;
-    late LocalCoffeeRepository localCoffeeRepository;
+    late CoffeeApiClientDatasource coffeeClientRepository;
+    late LocalCoffeeDatasource localCoffeeDatasource;
     late CoffeeRepository coffeeRepository;
 
     setUp(() {
       coffeeClientRepository = MockCoffeeClient();
-      localCoffeeRepository = MockLocalCoffeeUsecase();
+      localCoffeeDatasource = MockLocalCoffeeUsecase();
       coffeeRepository = MockCoffeeUsecase();
 
       when(coffeeRepository.fetch()).thenAnswer(
@@ -39,7 +39,7 @@ void main() {
         await tester.pumpWidget(
           AppProvider(
             coffeeClient: coffeeClientRepository,
-            localCoffeeRepository: localCoffeeRepository,
+            localCoffeeDatasource: localCoffeeDatasource,
             coffeeRepository: coffeeRepository,
           ),
         );
@@ -51,7 +51,7 @@ void main() {
       await tester.pumpWidget(
         AppProvider(
           coffeeClient: coffeeClientRepository,
-          localCoffeeRepository: localCoffeeRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
         ),
       );
@@ -71,7 +71,7 @@ void main() {
       await tester.pumpWidget(
         AppProvider(
           coffeeClient: coffeeClientRepository,
-          localCoffeeRepository: localCoffeeRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
         ),
       );
@@ -94,7 +94,7 @@ void main() {
         await tester.pumpWidget(
           AppProvider(
             coffeeClient: coffeeClientRepository,
-            localCoffeeRepository: localCoffeeRepository,
+            localCoffeeDatasource: localCoffeeDatasource,
             coffeeRepository: coffeeRepository,
           ),
         );
@@ -121,7 +121,7 @@ void main() {
       await tester.pumpWidget(
         AppProvider(
           coffeeClient: coffeeClientRepository,
-          localCoffeeRepository: localCoffeeRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
         ),
       );
@@ -134,7 +134,7 @@ void main() {
       await tester.pumpWidget(
         AppProvider(
           coffeeClient: coffeeClientRepository,
-          localCoffeeRepository: localCoffeeRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
           coffeeRepository: coffeeRepository,
         ),
       );

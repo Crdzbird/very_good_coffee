@@ -1,9 +1,9 @@
-part of 'coffee_client_repository.dart';
+part of 'coffee_api_client_datasource.dart';
 
 /// HTTP client that fetches [Coffee] from a remote server.
 /// - [_dio] is the [Dio] instance used to make HTTP requests.
-class CoffeeClient extends CoffeeClientRepository {
-  CoffeeClient({Dio? dio})
+class CoffeeApiClient extends CoffeeApiClientDatasource {
+  CoffeeApiClient({Dio? dio})
     : _dio = dio ?? Dio(BaseOptions(baseUrl: DartEnvs().baseUrl));
 
   /// The [Dio] instance used to make HTTP requests.

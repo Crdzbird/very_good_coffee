@@ -1,6 +1,6 @@
-part of 'local_coffee_repository.dart';
+part of 'local_coffee_datasource.dart';
 
-class LocalCoffeeUsecase extends LocalCoffeeRepository {
+class LocalCoffeeUsecase extends LocalCoffeeDatasource {
   LocalCoffeeUsecase(SharedPreferences sharedPreferences)
     : _sharedPreferences = sharedPreferences;
   final SharedPreferences _sharedPreferences;
