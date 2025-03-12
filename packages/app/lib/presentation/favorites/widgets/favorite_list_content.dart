@@ -12,18 +12,18 @@ class FavoriteListContent extends StatelessWidget {
       slivers: [
         BlocBuilder<FavoritesCubit, FavoritesState>(
           builder: (bContext, state) {
-            if (state is FavoritesLoading) {
-              return const SliverToBoxAdapter(
+            return switch (state) {
+              FavoritesLoading() => const SliverToBoxAdapter(
                 child: Center(child: CircularProgressIndicator.adaptive()),
-              );
-            }
-            return SliverList.separated(
-              itemCount: (state as FavoritesLoaded).coffeeList.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 6),
-              itemBuilder:
-                  (context, index) =>
-                      FavoriteCard(coffee: (state).coffeeList[index]),
-            );
+              ),
+              FavoritesLoaded() => SliverList.separated(
+                itemCount: state.coffeeList.length,
+                separatorBuilder: (context, index) => const SizedBox(height: 6),
+                itemBuilder:
+                    (context, index) =>
+                        FavoriteCard(coffee: state.coffeeList[index]),
+              ),
+            };
           },
         ),
       ],

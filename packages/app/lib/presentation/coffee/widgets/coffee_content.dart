@@ -10,16 +10,14 @@ class CoffeeContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CoffeeCubit, CoffeeState>(
       builder: (bContext, state) {
-        if (state is CoffeeLoading) {
-          return const CircularProgressIndicator.adaptive();
-        }
-        if (state is CoffeeError) {
-          return Text(state.message);
-        }
-        return VgcCoffeeCard(
-          coffee: (state as CoffeeLoaded).coffee,
-          isFavorite: state.isFavorite,
-        );
+        return switch (state) {
+          CoffeeLoading() => const CircularProgressIndicator.adaptive(),
+          CoffeeError() => Text(state.message),
+          CoffeeLoaded() => VgcCoffeeCard(
+            coffee: state.coffee,
+            isFavorite: state.isFavorite,
+          ),
+        };
       },
     );
   }
