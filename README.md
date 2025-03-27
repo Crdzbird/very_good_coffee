@@ -1,7 +1,11 @@
 # Very Good Coffee
 
 # Functional app video.
-[![Watch the video]](https://github.com/Crdzbird/very_good_coffee/blob/master/VeryGoodCoffee.mp4)
+
+
+https://github.com/user-attachments/assets/1a77e1e9-d158-4c9d-b189-373e725601c6
+
+
 
 
 ![coverage][coverage_badge]
