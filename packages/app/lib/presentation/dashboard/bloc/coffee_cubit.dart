@@ -34,8 +34,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
   }
 
   void saveCoffee(Coffee coffee) async {
-    await _coffeeRepository.save(coffee);
+    await Future.wait([_coffeeRepository.save(coffee), fetchCoffee()]);
     emit(CoffeeLoaded(_coffee, isFavorite: true));
-    await fetchCoffee();
   }
 }
