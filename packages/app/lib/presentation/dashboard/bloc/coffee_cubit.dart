@@ -28,11 +28,6 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     emit(CoffeeLoaded(result.$2!));
   }
 
-  void deleteCoffee(Coffee coffee) async {
-    await _coffeeRepository.delete(coffee);
-    emit(CoffeeLoaded(_coffee, isFavorite: false));
-  }
-
   void saveCoffee(Coffee coffee) async {
     await Future.wait([_coffeeRepository.save(coffee), fetchCoffee()]);
     emit(CoffeeLoaded(_coffee, isFavorite: true));

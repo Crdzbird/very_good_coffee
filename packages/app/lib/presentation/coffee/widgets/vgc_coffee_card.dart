@@ -50,6 +50,7 @@ class _VgcCoffeeCardState extends State<VgcCoffeeCard>
       );
     }
     return GestureDetector(
+      key: const Key('coffee_card'),
       onPanStart:
           (_) => setState(() {
             isDragging = true;

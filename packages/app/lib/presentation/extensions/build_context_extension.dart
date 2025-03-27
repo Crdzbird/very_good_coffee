@@ -8,9 +8,6 @@ extension BuildContextExtension on BuildContext {
 
   double get height => MediaQuery.sizeOf(this).height;
 
-  EdgeInsets get safePadding =>
-      MediaQuery.maybePaddingOf(this) ?? EdgeInsets.zero;
-
   bool get isApple =>
       defaultTargetPlatform == TargetPlatform.iOS ||
       defaultTargetPlatform == TargetPlatform.macOS;

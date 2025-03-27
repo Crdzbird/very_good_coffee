@@ -50,14 +50,15 @@ class CoffeeContent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     FloatingActionButton(
+                      key: const Key('dislike'),
                       heroTag: null,
                       shape: const CircleBorder(),
-
                       onPressed: context.read<CoffeeCubit>().fetchCoffee,
                       child: Icon(Icons.close),
                     ),
                     const Spacer(),
                     FloatingActionButton(
+                      key: const Key('like'),
                       heroTag: null,
                       shape: const CircleBorder(),
                       onPressed:

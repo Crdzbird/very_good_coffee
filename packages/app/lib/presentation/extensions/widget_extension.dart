@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:app/presentation/extensions/build_context_extension.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shimmer/shimmer.dart';
@@ -13,15 +11,6 @@ extension WidgetExtension on Widget {
       ),
       enabled: true,
       child: this,
-    );
-  }
-
-  Widget blur() {
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: this,
-      ),
     );
   }
 }
