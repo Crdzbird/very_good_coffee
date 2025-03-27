@@ -1,3 +1,4 @@
+import 'package:app/presentation/extensions/string_extension.dart';
 import 'package:app/presentation/extensions/widget_extension.dart';
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:app/presentation/router/vgc_screen_enum.dart';
@@ -36,11 +37,17 @@ class FavoriteCard extends StatelessWidget {
             VgcScreenEnum.detailFavorite.path,
             extra: {'url': _coffee.file},
           ),
-      child: Card(
-        elevation: 4,
+      child: Container(
         clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        margin: EdgeInsets.zero,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: _coffee.file.toColor(),
+            width: 4,
+            strokeAlign: BorderSide.strokeAlignOutside,
+          ),
+        ),
+        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Stack(
           fit: StackFit.passthrough,
           children: [
@@ -55,7 +62,7 @@ class FavoriteCard extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: _coffee.file,
                       cacheKey: '${_coffee.hashCode}',
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                       filterQuality: FilterQuality.high,
                     ),
                   ),

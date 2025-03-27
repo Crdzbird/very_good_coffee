@@ -1,5 +1,6 @@
 import 'package:app/presentation/dashboard/bloc/coffee_cubit.dart';
 import 'package:app/presentation/extensions/build_context_extension.dart';
+import 'package:app/presentation/extensions/string_extension.dart';
 import 'package:app/presentation/extensions/widget_extension.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -84,8 +85,8 @@ class _VgcCoffeeCardState extends State<VgcCoffeeCard>
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                color: context.theme.colorScheme.surfaceBright,
-                width: 8,
+                color: widget._coffee.file.toColor(),
+                width: 4,
                 strokeAlign: BorderSide.strokeAlignOutside,
               ),
             ),
