@@ -26,7 +26,6 @@ class FavoriteCard extends StatelessWidget {
               Layer(
                 sensitivity: 7,
                 imageFit: BoxFit.fill,
-                preventCrop: true,
                 widget: CachedNetworkImage(
                   imageUrl: _coffee.file,
                   cacheKey: '${_coffee.hashCode}',

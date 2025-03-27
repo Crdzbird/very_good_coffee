@@ -1,5 +1,4 @@
 import 'package:app/presentation/coffee/widgets/coffee_content.dart';
-import 'package:app/presentation/coffee/widgets/next_coffee.dart';
 import 'package:flutter/material.dart';
 
 class CoffeeScreen extends StatelessWidget {
@@ -7,9 +6,6 @@ class CoffeeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const CoffeeContent(),
-      floatingActionButton: NextCoffee(),
-    );
+    return Scaffold(body: const CoffeeContent());
   }
 }

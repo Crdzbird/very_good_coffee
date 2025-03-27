@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 extension BuildContextExtension on BuildContext {
   ThemeData get theme => Theme.of(this);
 
+  double get width => MediaQuery.sizeOf(this).width;
+
+  double get height => MediaQuery.sizeOf(this).height;
+
   EdgeInsets get safePadding =>
       MediaQuery.maybePaddingOf(this) ?? EdgeInsets.zero;
 
