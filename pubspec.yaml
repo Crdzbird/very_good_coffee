@@ -5,12 +5,12 @@ environment:
   sdk: ^3.7.0
 
 workspace:
-    - packages/coffee_repository
-    - packages/dart_envs
-    - packages/http_client
-    - packages/local_coffee
-    - packages/models
-    - packages/app
+  - packages/coffee_repository
+  - packages/dart_envs
+  - packages/http_client
+  - packages/local_coffee
+  - packages/models
+  - packages/app
 
 dependencies:
   equatable: ^2.0.7

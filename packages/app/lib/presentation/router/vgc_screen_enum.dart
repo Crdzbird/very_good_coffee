@@ -1,6 +1,6 @@
 enum VgcScreenEnum {
-  root('/'),
-  favorites('favorites');
+  coffees('/coffees'),
+  favorites('/favorites');
 
   const VgcScreenEnum(this.path);
   final String path;

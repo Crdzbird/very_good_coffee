@@ -1,3 +1,4 @@
+import 'package:app/presentation/dashboard/bloc/coffee_cubit.dart';
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
@@ -12,6 +13,7 @@ class FavoritesScreen extends StatelessWidget {
     return BlocProvider(
       create:
           (bContext) => FavoritesCubit(
+            coffeeCubit: bContext.read<CoffeeCubit>(),
             coffeeRepository: bContext.read<CoffeeRepository>(),
           )..fetchFavorites(),
       child: const FavoritesView(),

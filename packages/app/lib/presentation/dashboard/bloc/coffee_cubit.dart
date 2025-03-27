@@ -19,7 +19,7 @@ class CoffeeCubit extends Cubit<CoffeeState> {
     return Coffee();
   }
 
-  void fetchCoffee() async {
+  Future<void> fetchCoffee() async {
     emit(CoffeeLoading());
     final result = await _coffeeRepository.fetch();
     if (result.$1 != null) {

@@ -1,5 +1,5 @@
 import 'package:app/presentation/app/screen/app_screen.dart';
-import 'package:app/presentation/coffee/view/coffee_view.dart';
+import 'package:app/presentation/coffee/screen/coffee_screen.dart';
 import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ void main() {
             coffeeRepository: coffeeRepository,
           ),
         );
-        expect(find.byType(CoffeeView), findsOneWidget);
+        expect(find.byType(CoffeeScreen), findsOneWidget);
       }),
     );
 
@@ -57,7 +57,7 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeView), findsOneWidget);
+      expect(find.byType(CoffeeScreen), findsOneWidget);
       await tester.tap(find.byIcon(Icons.refresh));
       await tester.pumpAndSettle();
 
@@ -74,7 +74,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeView), findsOneWidget);
+      expect(find.byType(CoffeeScreen), findsOneWidget);
 
       final switchFinder = find.byType(Switch);
       await tester.tap(switchFinder);
@@ -97,7 +97,7 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        expect(find.byType(CoffeeView), findsOneWidget);
+        expect(find.byType(CoffeeScreen), findsOneWidget);
 
         final switchFinder = find.byType(Switch);
         await tester.tap(switchFinder);
@@ -137,7 +137,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeView), findsOneWidget);
+      expect(find.byType(CoffeeScreen), findsOneWidget);
       await tester.tap(find.text('Favorites'));
       await tester.pumpAndSettle();
       expect(find.byType(FavoritesView), findsOneWidget);
