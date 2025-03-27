@@ -5,7 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:coffee_repository/src/coffee_repository.dart' as _i7;
+import 'package:app/presentation/favorites/bloc/favorites_cubit.dart' as _i8;
+import 'package:coffee_repository/coffee_repository.dart' as _i7;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i9;
 import 'package:http_client/http_client.dart' as _i2;
 import 'package:local_coffee/local_coffee.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
@@ -131,4 +133,82 @@ class MockCoffeeUsecase extends _i1.Mock implements _i7.CoffeeUsecase {
             returnValueForMissingStub: _i3.Future<void>.value(),
           )
           as _i3.Future<void>);
+}
+
+/// A class which mocks [FavoritesCubit].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockFavoritesCubit extends _i1.Mock implements _i8.FavoritesCubit {
+  MockFavoritesCubit() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.FavoritesState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i6.dummyValue<_i8.FavoritesState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i8.FavoritesState);
+
+  @override
+  _i3.Stream<_i8.FavoritesState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i3.Stream<_i8.FavoritesState>.empty(),
+          )
+          as _i3.Stream<_i8.FavoritesState>);
+
+  @override
+  bool get isClosed =>
+      (super.noSuchMethod(Invocation.getter(#isClosed), returnValue: false)
+          as bool);
+
+  @override
+  void fetchFavorites() => super.noSuchMethod(
+    Invocation.method(#fetchFavorites, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void deleteFavorite(_i4.Coffee? coffee) => super.noSuchMethod(
+    Invocation.method(#deleteFavorite, [coffee]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i3.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  void emit(_i8.FavoritesState? state) => super.noSuchMethod(
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onChange(_i9.Change<_i8.FavoritesState>? change) => super.noSuchMethod(
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }

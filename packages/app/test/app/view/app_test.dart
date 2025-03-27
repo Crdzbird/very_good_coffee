@@ -9,6 +9,7 @@ import 'package:local_coffee/local_coffee.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:models/models.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../helpers/mocks.mocks.dart';
 
@@ -47,7 +48,7 @@ void main() {
       }),
     );
 
-    testWidgets('renders CoffeeView and taps on refresh', (tester) async {
+    testWidgets('renders CoffeeView and taps on favorite', (tester) async {
       await tester.pumpWidget(
         AppScreen(
           coffeeClient: coffeeClientRepository,
@@ -58,13 +59,12 @@ void main() {
 
       await tester.pumpAndSettle();
       expect(find.byType(CoffeeScreen), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.refresh));
+      await tester.tap(find.byKey(const Key('like')));
       await tester.pumpAndSettle();
-
       verify(coffeeRepository.fetch()).called(2);
     });
 
-    testWidgets('renders CoffeeView and taps on save favorite', (tester) async {
+    testWidgets('renders CoffeeView and taps on not favorite', (tester) async {
       when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
       await tester.pumpWidget(
         AppScreen(
@@ -76,41 +76,42 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(CoffeeScreen), findsOneWidget);
 
-      final switchFinder = find.byType(Switch);
-      await tester.tap(switchFinder);
+      await tester.tap(find.byKey(const Key('dislike')));
       await tester.pumpAndSettle();
-      final switchWidget = tester.widget<Switch>(switchFinder);
-      expect(switchWidget.value, true);
+      verify(coffeeRepository.fetch()).called(2);
     });
 
-    testWidgets(
-      'renders CoffeeView and taps on save favorite, then remove it',
-      (tester) async {
-        when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
-        when(coffeeRepository.delete(Coffee())).thenAnswer((_) async {});
+    testWidgets('renders CoffeeView and drag to not favorite', (tester) async {
+      when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
+      await tester.pumpWidget(
+        AppScreen(
+          coffeeClient: coffeeClientRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
+          coffeeRepository: coffeeRepository,
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.byType(CoffeeScreen), findsOneWidget);
+      await tester.drag(find.byKey(Key('coffee_card')), const Offset(-110, 0));
+      await tester.pumpAndSettle();
+      verify(coffeeRepository.fetch()).called(2);
+    });
 
-        await tester.pumpWidget(
-          AppScreen(
-            coffeeClient: coffeeClientRepository,
-            localCoffeeDatasource: localCoffeeDatasource,
-            coffeeRepository: coffeeRepository,
-          ),
-        );
-        await tester.pumpAndSettle();
-        expect(find.byType(CoffeeScreen), findsOneWidget);
+    testWidgets('renders CoffeeView and drags on favorite', (tester) async {
+      await tester.pumpWidget(
+        AppScreen(
+          coffeeClient: coffeeClientRepository,
+          localCoffeeDatasource: localCoffeeDatasource,
+          coffeeRepository: coffeeRepository,
+        ),
+      );
 
-        final switchFinder = find.byType(Switch);
-        await tester.tap(switchFinder);
-        await tester.pumpAndSettle();
-        final switchWidget = tester.widget<Switch>(switchFinder);
-        expect(switchWidget.value, true);
-
-        await tester.tap(switchFinder);
-        await tester.pumpAndSettle();
-        final switchWidget2 = tester.widget<Switch>(switchFinder);
-        expect(switchWidget2.value, false);
-      },
-    );
+      await tester.pumpAndSettle();
+      expect(find.byType(CoffeeScreen), findsOneWidget);
+      await tester.drag(find.byKey(Key('coffee_card')), const Offset(110, 0));
+      await tester.pumpAndSettle();
+      verify(coffeeRepository.fetch()).called(2);
+    });
 
     testWidgets('Error widget render', (tester) async {
       when(
@@ -123,8 +124,8 @@ void main() {
           coffeeRepository: coffeeRepository,
         ),
       );
-      await tester.pumpAndSettle();
-      expect(find.text('Fake Error'), findsOneWidget);
+      await tester.pump(Durations.medium2);
+      expect(find.byType(Shimmer), findsOneWidget);
     });
 
     testWidgets('go to favorites screen', (tester) async {
