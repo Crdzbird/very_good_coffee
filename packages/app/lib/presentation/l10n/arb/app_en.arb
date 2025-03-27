@@ -1,5 +1,6 @@
 {
     "@@locale": "en",
     "coffees": "Coffees",
-    "favorites": "Favorites"
+    "favorites": "Favorites",
+    "detailFavorite": "Favorite Detail"
 }

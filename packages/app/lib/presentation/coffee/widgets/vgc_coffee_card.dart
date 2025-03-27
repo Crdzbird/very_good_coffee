@@ -115,11 +115,13 @@ class _VgcCoffeeCardState extends State<VgcCoffeeCard>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       FloatingActionButton(
+                        heroTag: null,
                         onPressed: context.read<CoffeeCubit>().fetchCoffee,
                         child: Icon(Icons.close),
                       ),
                       const Spacer(),
                       FloatingActionButton(
+                        heroTag: null,
                         child: Icon(Icons.favorite),
                         onPressed:
                             () => context.read<CoffeeCubit>().saveCoffee(

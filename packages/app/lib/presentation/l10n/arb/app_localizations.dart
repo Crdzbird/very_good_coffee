@@ -109,6 +109,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Favorites'**
   String get favorites;
+
+  /// No description provided for @detailFavorite.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Detail'**
+  String get detailFavorite;
 }
 
 class _AppLocalizationsDelegate

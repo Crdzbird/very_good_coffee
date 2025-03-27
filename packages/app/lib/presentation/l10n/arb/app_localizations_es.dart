@@ -13,4 +13,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get favorites => 'Favoritos';
+
+  @override
+  String get detailFavorite => 'Detalle Favorito';
 }
