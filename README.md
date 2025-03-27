@@ -1,5 +1,9 @@
 # Very Good Coffee
 
+# Functional app video.
+[![Watch the video]](https://github.com/Crdzbird/very_good_coffee/blob/master/VeryGoodCoffee.mp4)
+
+
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]
