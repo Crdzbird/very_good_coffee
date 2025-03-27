@@ -1,5 +1,5 @@
 import 'package:app/presentation/app/screen/app_screen.dart';
-import 'package:app/presentation/coffee/coffee_view.dart';
+import 'package:app/presentation/coffee/view/coffee_view.dart';
 import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
