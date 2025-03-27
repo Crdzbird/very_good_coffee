@@ -1,5 +1,5 @@
 import 'package:app/presentation/app/screen/app_screen.dart';
-import 'package:app/presentation/coffee/coffee_screen.dart';
+import 'package:app/presentation/coffee/coffee_view.dart';
 import 'package:app/presentation/favorites/view/favorites_view.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +43,11 @@ void main() {
             coffeeRepository: coffeeRepository,
           ),
         );
-        expect(find.byType(CoffeeScreen), findsOneWidget);
+        expect(find.byType(CoffeeView), findsOneWidget);
       }),
     );
 
-    testWidgets('renders CoffeeScreen and taps on refresh', (tester) async {
+    testWidgets('renders CoffeeView and taps on refresh', (tester) async {
       await tester.pumpWidget(
         AppScreen(
           coffeeClient: coffeeClientRepository,
@@ -57,16 +57,14 @@ void main() {
       );
 
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeScreen), findsOneWidget);
+      expect(find.byType(CoffeeView), findsOneWidget);
       await tester.tap(find.byIcon(Icons.refresh));
       await tester.pumpAndSettle();
 
       verify(coffeeRepository.fetch()).called(2);
     });
 
-    testWidgets('renders CoffeeScreen and taps on save favorite', (
-      tester,
-    ) async {
+    testWidgets('renders CoffeeView and taps on save favorite', (tester) async {
       when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
       await tester.pumpWidget(
         AppScreen(
@@ -76,7 +74,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeScreen), findsOneWidget);
+      expect(find.byType(CoffeeView), findsOneWidget);
 
       final switchFinder = find.byType(Switch);
       await tester.tap(switchFinder);
@@ -86,7 +84,7 @@ void main() {
     });
 
     testWidgets(
-      'renders CoffeeScreen and taps on save favorite, then remove it',
+      'renders CoffeeView and taps on save favorite, then remove it',
       (tester) async {
         when(coffeeRepository.save(Coffee())).thenAnswer((_) async {});
         when(coffeeRepository.delete(Coffee())).thenAnswer((_) async {});
@@ -99,7 +97,7 @@ void main() {
           ),
         );
         await tester.pumpAndSettle();
-        expect(find.byType(CoffeeScreen), findsOneWidget);
+        expect(find.byType(CoffeeView), findsOneWidget);
 
         final switchFinder = find.byType(Switch);
         await tester.tap(switchFinder);
@@ -139,7 +137,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      expect(find.byType(CoffeeScreen), findsOneWidget);
+      expect(find.byType(CoffeeView), findsOneWidget);
       await tester.tap(find.text('Favorites'));
       await tester.pumpAndSettle();
       expect(find.byType(FavoritesView), findsOneWidget);
