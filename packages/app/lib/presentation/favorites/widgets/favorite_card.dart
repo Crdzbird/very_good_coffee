@@ -1,3 +1,4 @@
+import 'package:app/presentation/extensions/widget_extension.dart';
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:app/presentation/router/vgc_screen_enum.dart';
 import 'package:app/presentation/widgets/parallax/parallax.dart';
@@ -9,12 +10,26 @@ import 'package:go_router/go_router.dart';
 import 'package:models/models.dart';
 
 class FavoriteCard extends StatelessWidget {
-  const FavoriteCard({super.key, required Coffee coffee}) : _coffee = coffee;
+  const FavoriteCard({super.key, required Coffee coffee, bool shimmer = false})
+    : _coffee = coffee,
+      _shimmer = shimmer;
+
+  factory FavoriteCard.shimmer() {
+    return FavoriteCard(coffee: Coffee(), shimmer: true);
+  }
 
   final Coffee _coffee;
+  final bool _shimmer;
 
   @override
   Widget build(BuildContext context) {
+    if (_shimmer) {
+      return Card(
+        elevation: 4,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ).shimmer(context);
+    }
     return InkWell(
       onTap:
           () => context.go(

@@ -1,9 +1,6 @@
 import 'package:app/presentation/dashboard/bloc/coffee_cubit.dart';
 import 'package:app/presentation/extensions/build_context_extension.dart';
 import 'package:app/presentation/extensions/widget_extension.dart';
-import 'package:app/presentation/widgets/parallax/paralax_sensors_enum.dart';
-import 'package:app/presentation/widgets/parallax/parallax.dart';
-import 'package:app/presentation/widgets/parallax/parallax_layer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +41,10 @@ class _VgcCoffeeCardState extends State<VgcCoffeeCard>
     if (widget._isShimmer) {
       return Center(
         child: Card(
-          child: SizedBox(height: context.height, width: context.width),
+          child: SizedBox(
+            height: context.height * .4,
+            width: context.width * .7,
+          ),
         ).shimmer(context),
       );
     }
@@ -76,59 +76,41 @@ class _VgcCoffeeCardState extends State<VgcCoffeeCard>
       child: AnimatedRotation(
         turns: isDragging ? position.dx / 10000 : 0,
         duration: const Duration(milliseconds: 500),
-        child: AnimatedContainer(
-          duration:
-              isDragging ? const Duration(milliseconds: 50) : Duration.zero,
-          transform: Matrix4.identity()..translate(position.dx, position.dy),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: context.height,
-              maxHeight: context.height,
-              maxWidth: context.width,
-              minWidth: context.width,
+        child: Center(
+          child: AnimatedContainer(
+            duration:
+                isDragging ? const Duration(milliseconds: 50) : Duration.zero,
+            transform: Matrix4.identity()..translate(position.dx, position.dy),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: context.theme.colorScheme.surfaceBright,
+                width: 8,
+                strokeAlign: BorderSide.strokeAlignOutside,
+              ),
             ),
+            clipBehavior: Clip.antiAlias,
+            height: context.height * .4,
+            width: context.width * .7,
             child: Stack(
-              alignment: Alignment.center,
+              fit: StackFit.passthrough,
               children: [
-                Parallax(
-                  sensor: ParallaxSensorsEnum.gyroscope,
-                  layers: [
-                    Layer(
-                      sensitivity: 7,
-                      imageFit: BoxFit.fill,
-                      child: CachedNetworkImage(
-                        imageUrl: widget._coffee.file,
-                        filterQuality: FilterQuality.high,
-                        height: context.height,
-                        width: context.width,
-                        fit: BoxFit.fill,
-                        cacheKey: '${widget._coffee.hashCode}',
-                      ),
-                    ),
-                  ],
+                CachedNetworkImage(
+                  imageUrl: widget._coffee.file,
+                  filterQuality: FilterQuality.high,
+                  fit: BoxFit.fill,
+                  cacheKey: '${widget._coffee.hashCode}',
                 ),
                 Positioned(
-                  bottom: 8,
-                  left: context.safePadding.left + 8,
-                  right: context.safePadding.right + 8,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      FloatingActionButton(
-                        heroTag: null,
-                        onPressed: context.read<CoffeeCubit>().fetchCoffee,
-                        child: Icon(Icons.close),
-                      ),
-                      const Spacer(),
-                      FloatingActionButton(
-                        heroTag: null,
-                        child: Icon(Icons.favorite),
-                        onPressed:
-                            () => context.read<CoffeeCubit>().saveCoffee(
-                              widget._coffee,
-                            ),
-                      ),
-                    ],
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Text(
+                    widget._coffee.file,
+                    style: context.theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],
