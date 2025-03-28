@@ -14,6 +14,14 @@ void main() {
         ConstantsRouter.rootNavigatorKey.currentContext?.l10n.coffees,
         'Coffees',
       );
+      expect(
+        ConstantsRouter.rootNavigatorKey.currentContext?.l10n.favorites,
+        'Favorites',
+      );
+      expect(
+        ConstantsRouter.rootNavigatorKey.currentContext?.l10n.detailFavorite,
+        'Favorite Detail',
+      );
     });
 
     testWidgets('Localization spanish', (widgetTester) async {
@@ -22,6 +30,14 @@ void main() {
       expect(
         ConstantsRouter.rootNavigatorKey.currentContext?.l10n.coffees,
         'Cafés',
+      );
+      expect(
+        ConstantsRouter.rootNavigatorKey.currentContext?.l10n.favorites,
+        'Favoritos',
+      );
+      expect(
+        ConstantsRouter.rootNavigatorKey.currentContext?.l10n.detailFavorite,
+        'Detalle Favorito',
       );
     });
   });

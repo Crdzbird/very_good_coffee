@@ -1,4 +1,5 @@
 import 'package:app/presentation/app/screen/app_screen.dart';
+import 'package:app/presentation/dashboard/bloc/coffee_cubit.dart';
 import 'package:app/presentation/favorite_detail/screen/favorite_detail_screen.dart';
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:app/presentation/favorites/view/favorites_view.dart';
@@ -13,6 +14,7 @@ import 'package:mockito/mockito.dart';
 import 'package:models/models.dart';
 
 import '../helpers/mocks.mocks.dart';
+import '../helpers/pump_app.dart';
 
 void main() {
   group('App', () {
@@ -21,12 +23,19 @@ void main() {
     late CoffeeRepository coffeeRepository;
 
     late FavoritesCubit favoritesCubit;
+    late FavoritesCubit favoritesCubitStub;
+    late CoffeeCubit coffeeCubit;
 
     setUp(() {
       coffeeClientRepository = MockCoffeeApiClient();
       localCoffeeDatasource = MockLocalCoffeeUsecase();
       coffeeRepository = MockCoffeeUsecase();
       favoritesCubit = MockFavoritesCubit();
+      coffeeCubit = MockCoffeeCubit();
+      favoritesCubitStub = FavoritesCubit(
+        coffeeRepository: coffeeRepository,
+        coffeeCubit: coffeeCubit,
+      );
 
       when(coffeeRepository.fetch()).thenAnswer(
         (_) async => (
@@ -98,6 +107,9 @@ void main() {
         Coffee(file: 'https://coffee.alexflipnote.dev/2cuNGfDh1V0_coffee.png'),
       ]);
       when(favoritesCubit.state).thenReturn(FavoritesLoading());
+      when(
+        coffeeCubit.stream,
+      ).thenAnswer((_) => Stream<CoffeeState>.fromIterable([CoffeeLoading()]));
       when(coffeeRepository.fetch()).thenAnswer(
         (_) async => (
           null,
@@ -106,20 +118,23 @@ void main() {
           ),
         ),
       );
-      await tester.pumpWidget(
-        BlocProvider.value(
-          value: favoritesCubit,
-          child: AppScreen(
-            coffeeClient: coffeeClientRepository,
-            localCoffeeDatasource: localCoffeeDatasource,
-            coffeeRepository: coffeeRepository,
+      await tester.pumpApp(
+        RepositoryProvider<CoffeeRepository>(
+          create:
+              (rContext) => CoffeeUsecase(
+                coffeeClient: coffeeClientRepository,
+                localCoffeeDatasource: localCoffeeDatasource,
+              ),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: coffeeCubit),
+              BlocProvider.value(value: favoritesCubitStub),
+            ],
+            child: FavoritesView(),
           ),
         ),
       );
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Favorites'));
-      await tester.pump(Duration(milliseconds: 1));
-      expect(find.byType(FavoritesView), findsOneWidget);
+      await tester.pump(Durations.short1);
       expect(find.byType(FavoriteGridview), findsAny);
     });
 

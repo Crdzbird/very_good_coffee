@@ -1,3 +1,4 @@
+import 'package:app/presentation/dashboard/bloc/coffee_cubit.dart';
 import 'package:app/presentation/favorites/bloc/favorites_cubit.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:http_client/http_client.dart';
@@ -11,3 +12,6 @@ import 'package:mockito/annotations.dart';
   FavoritesCubit,
 ])
 class GeneratedMocks {}
+
+@GenerateNiceMocks([MockSpec<CoffeeCubit>()])
+class GeneratedNiceMocks {}
